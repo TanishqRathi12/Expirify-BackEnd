@@ -10,7 +10,6 @@ const {
 const router = express.Router();
 const verifyToken = require('../middlewares/auth.middleware');
 
-// Middleware for handling file uploads
 router.use(fileUpload());
 
 router.post('/scan', verifyToken, (req, res) => {
@@ -18,15 +17,15 @@ router.post('/scan', verifyToken, (req, res) => {
         return res.status(400).send('No files were uploaded.');
     }
 
-    const uploadedFile = req.files.file; // Access the uploaded file
-    const uploadPath = `./uploads/${uploadedFile.name}`; // Specify the upload path
+    const uploadedFile = req.files.image;
+    const uploadPath = `./uploads/${uploadedFile.name}`; 
 
-    // Move the file to the desired location
+   
     uploadedFile.mv(uploadPath, (err) => {
         if (err) {
             return res.status(500).send(err);
         }
-        uploadProductImage(req, res, uploadPath); // Call your controller function
+        uploadProductImage(req, res, uploadPath); 
     });
 });
 

@@ -17,10 +17,10 @@ app.use(express.json());
 app.use("/", authRoutes);
 app.use("/", productRoutes);
 
-cron.schedule('12 12 * * *', async () => {  //Run daily at 12pm
+cron.schedule('0 12 * * *', async () => {  
   console.log("Running expiry check...");
   try {
-      await checkForExpiringProducts();  // Async call
+      await checkForExpiringProducts(); 
   } catch (error) {
       console.error("Error during expiry check: ", error.message);
   }
